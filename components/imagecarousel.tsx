@@ -9,30 +9,34 @@ function Item(props: any) {
 		backgroundSize: "cover",
 		backgroundPosition: "center",
 		width: `calc(100vw + 48px)`,
-		padding: 24,
 	};
 
 	return (
 		<>
 			<div className='flex flex-col-reverse' style={paperContainer}>
-				<div className='shrink'>
-					<Typography variant='button' display='block' gutterBottom>
-						<Button
-							variant='contained'
-							size='large'
-							href={props.item.link}
-							startIcon={<ShopIcon />}
+				<div className='min-w-screen flex flex-col items-center'>
+					<div className='flex mx-auto'>
+						<Typography
+							variant='h2'
+							className='text-white capitalize font-extrabold'
 						>
-							<Typography variant='button' className='text-white'>
-								{props.item.button}
-							</Typography>
-						</Button>
-					</Typography>
-				</div>
-				<div className='flex-shrink'>
-					<Typography variant='h3' className='text-white'>
-						{props.item.name}
-					</Typography>
+							{props.item.name}
+						</Typography>
+					</div>
+					<div className='shrink'>
+						<Typography variant='button' display='block' gutterBottom>
+							<Button
+								variant='contained'
+								size='large'
+								href={props.item.link}
+								startIcon={<ShopIcon />}
+							>
+								<Typography variant='button' className='text-white py-2 px-4'>
+									{props.item.button}
+								</Typography>
+							</Button>
+						</Typography>
+					</div>
 				</div>
 			</div>
 		</>
