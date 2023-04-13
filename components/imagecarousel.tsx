@@ -24,7 +24,7 @@ function Item(props: any) {
 							startIcon={<ShopIcon />}
 						>
 							<Typography variant='button' className='text-white'>
-								Shop Keyboards
+								{props.item.button}
 							</Typography>
 						</Button>
 					</Typography>
@@ -45,16 +45,19 @@ export default function imageCarousel() {
 			name: "Custom Mechnical Keyboards!",
 			image: "/board1.jpg",
 			link: "/products",
+			button: "Shop Keyboards",
 		},
 		{
 			name: "Custom Mechnical Keyboards!",
 			image: "/board2.jpeg",
 			link: "/products",
+			button: "Shop Keyboards",
 		},
 		{
 			name: "Custom Mechnical Keyboards!",
 			image: "/board3.jpg",
 			link: "/products",
+			button: "Shop Keyboards",
 		},
 	];
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
@@ -7,6 +7,9 @@ import Favicon from "../public/favicon.ico";
 import Link from "next/link";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Button } from "@mui/material";
+import useUser from "../lib/useUser";
+import { useRouter } from "next/router";
+import fetchJson from "../lib/fetchJson";
 
 const navigation = [
 	{ name: "Home", href: "/" },
@@ -18,12 +21,9 @@ function classNames(...classes: any[]) {
 	return classes.filter(Boolean).join(" ");
 }
 
-// drawer use state
 export default function Navigation() {
-	const [open, setOpen] = React.useState("false");
-	const [user, setUser] = React.useState(
-		typeof window !== "undefined" ? localStorage.getItem("user") : null
-	);
+	const { user, mutateUser } = useUser();
+	const router = useRouter();
 
 	return (
 		<div>
@@ -81,7 +81,7 @@ export default function Navigation() {
 											className='h-6 w-6'
 										/>
 									</Button>
-									{user ? (
+									{user?.isLoggedIn === true ? (
 										<Menu as='div' className='relative ml-3'>
 											<div>
 												<Menu.Button className='flex rounded-full bg-gray-800 text-sm hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800'>
@@ -90,7 +90,7 @@ export default function Navigation() {
 														className='text-gray-300 
 													px-3 py-2 rounded-md text-sm font-medium'
 													>
-														Profile
+														Hello, {user.firstName} {user.lastName}!
 													</p>
 												</Menu.Button>
 											</div>
@@ -126,7 +126,17 @@ export default function Navigation() {
 													</Menu.Item>
 													<Menu.Item>
 														<Link
-															href='/signout'
+															href='/api/logout'
+															onClick={async (e) => {
+																e.preventDefault();
+																mutateUser(
+																	await fetchJson("/api/logout", {
+																		method: "POST",
+																	}),
+																	false
+																);
+																router.push("/login");
+															}}
 															className={classNames(
 																"block px-4 py-2 text-sm text-gray-700"
 															)}
