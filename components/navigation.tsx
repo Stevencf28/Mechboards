@@ -94,6 +94,7 @@ export default function Navigation() {
 													</p>
 												</Menu.Button>
 											</div>
+
 											<Transition
 												as={Fragment}
 												enter='transition ease-out duration-100'
@@ -108,7 +109,7 @@ export default function Navigation() {
 														<Link
 															href='/profile'
 															className={classNames(
-																"block px-4 py-2 text-sm text-gray-700"
+																"block px-4 py-2 text-sm text-gray-700 hover:bg-gray-800 hover:text-white border-b"
 															)}
 														>
 															Your Profile
@@ -118,7 +119,7 @@ export default function Navigation() {
 														<Link
 															href='/orders'
 															className={classNames(
-																"block px-4 py-2 text-sm text-gray-700"
+																"block px-4 py-2 text-sm text-gray-700 hover:bg-gray-800 hover:text-white border-b"
 															)}
 														>
 															Your orders
@@ -138,7 +139,27 @@ export default function Navigation() {
 																router.push("/login");
 															}}
 															className={classNames(
-																"block px-4 py-2 text-sm text-gray-700"
+																"block px-4 py-2 text-sm text-gray-700 hover:bg-gray-800 hover:text-white border-b"
+															)}
+														>
+															Cart
+														</Link>
+													</Menu.Item>
+													<Menu.Item>
+														<Link
+															href='/api/logout'
+															onClick={async (e) => {
+																e.preventDefault();
+																mutateUser(
+																	await fetchJson("/api/logout", {
+																		method: "POST",
+																	}),
+																	false
+																);
+																router.push("/login");
+															}}
+															className={classNames(
+																"block px-4 py-2 text-sm text-gray-700 hover:bg-gray-800 hover:text-white"
 															)}
 														>
 															Sign out
@@ -174,7 +195,7 @@ export default function Navigation() {
 														<Link
 															href='/login'
 															className={classNames(
-																"block px-4 py-2 text-sm text-gray-700"
+																"block px-4 py-2 text-sm text-gray-700 hover:bg-gray-800 hover:text-white"
 															)}
 														>
 															Login
@@ -184,7 +205,7 @@ export default function Navigation() {
 														<Link
 															href='/register'
 															className={classNames(
-																"block px-4 py-2 text-sm text-gray-700"
+																"block px-4 py-2 text-sm text-gray-700 hover:bg-gray-800 hover:text-white"
 															)}
 														>
 															Register

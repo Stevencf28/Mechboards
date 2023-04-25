@@ -24,14 +24,19 @@ function Item(props: any) {
 						</Typography>
 					</div>
 					<div className='shrink'>
-						<Typography variant='button' display='block' gutterBottom>
+						<Typography
+							variant='button'
+							display='block'
+							gutterBottom
+							className='mx-auto justify-center'
+						>
 							<Button
 								variant='contained'
 								size='large'
 								href={props.item.link}
 								startIcon={<ShopIcon />}
 							>
-								<Typography variant='button' className='text-white py-2 px-4'>
+								<Typography variant='button' className='text-white py-1` px-2'>
 									{props.item.button}
 								</Typography>
 							</Button>
