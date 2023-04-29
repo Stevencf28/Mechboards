@@ -9,6 +9,7 @@ export type User = {
 	lastName: string;
 	email: string;
 	isLoggedIn: boolean;
+	userType: string;
 };
 
 export default withIronSessionApiRoute(userRoute, sessionOptions);
@@ -28,6 +29,7 @@ async function userRoute(req: NextApiRequest, res: NextApiResponse<User>) {
 			lastName: "",
 			email: "",
 			isLoggedIn: false,
+			userType: "customer",
 		});
 	}
 }

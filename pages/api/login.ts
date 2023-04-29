@@ -37,6 +37,7 @@ async function login(req: NextApiRequest, res: NextApiResponse) {
 			lastName: user.lastName,
 			email: user.email,
 			isLoggedIn: true,
+			userType: user.userType,
 		};
 
 		await req.session.save();

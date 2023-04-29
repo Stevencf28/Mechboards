@@ -24,7 +24,6 @@ function classNames(...classes: any[]) {
 export default function Navigation() {
 	const { user, mutateUser } = useUser();
 	const router = useRouter();
-
 	return (
 		<div>
 			<Disclosure as='nav' className='bg-gray-800'>
@@ -115,6 +114,21 @@ export default function Navigation() {
 															Your Profile
 														</Link>
 													</Menu.Item>
+													{/* If in the future an admin page wants to be included. */}
+													{user.userType === "admin" ? (
+														<Menu.Item>
+															<Link
+																href='/admin'
+																className={classNames(
+																	"block px-4 py-2 text-sm text-gray-700 hover:bg-gray-800 hover:text-white border-b"
+																)}
+															>
+																Admin Page
+															</Link>
+														</Menu.Item>
+													) : (
+														<></>
+													)}
 													<Menu.Item>
 														<Link
 															href='/orders'
@@ -127,17 +141,7 @@ export default function Navigation() {
 													</Menu.Item>
 													<Menu.Item>
 														<Link
-															href='/api/logout'
-															onClick={async (e) => {
-																e.preventDefault();
-																mutateUser(
-																	await fetchJson("/api/logout", {
-																		method: "POST",
-																	}),
-																	false
-																);
-																router.push("/login");
-															}}
+															href='/cart'
 															className={classNames(
 																"block px-4 py-2 text-sm text-gray-700 hover:bg-gray-800 hover:text-white border-b"
 															)}

@@ -10,11 +10,16 @@ import {
 } from "next";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
+import BlockIcon from "@mui/icons-material/Block";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { Button } from "@mui/material";
+import { useRouter } from "next/router";
 
 interface Product {
 	productId: number;
 	name: string;
 	price: number;
+	quantity: number;
 	description: string;
 	imgSrc: string;
 	imgAlt: string;
@@ -49,6 +54,7 @@ export default function ProductPage({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
 	const [isLoading, setIsLoading] = useState(true);
 	const [count, setCount] = useState<number>(1);
+	const router = useRouter();
 
 	useEffect(() => {
 		if (product) {
@@ -98,9 +104,27 @@ export default function ProductPage({
 			setCount(newCount);
 		}
 	}
+
+	function handleBackClick() {
+		if (router && router.back) {
+			router.back();
+		}
+		router.push("/products");
+	}
+
 	return (
 		<div className='container m-auto'>
 			<div className='pt-8'>
+				<div className='pb-6 pl-40'>
+					<Button
+						className='flex flex-row space-x-2 bg-gray-800'
+						variant='contained'
+						onClick={handleBackClick}
+						startIcon={<ArrowBackIcon />}
+					>
+						<h4 className='text-md'>Go Back</h4>
+					</Button>
+				</div>
 				<div className='mx-auto lg:grid lg:grid-cols-2 lg:grid-rows-2 lg:max-w-7xl lg:gap-x-8 lg:px-8'>
 					<div>
 						<Image
@@ -151,13 +175,23 @@ export default function ProductPage({
 									<AddIcon></AddIcon>
 								</button>
 							</div>
-
-							<button
-								type='submit'
-								className='mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
-							>
-								Add to Cart
-							</button>
+							{product.quantity > 1 ? (
+								<Button
+									type='submit'
+									className='mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
+								>
+									Add to Cart
+								</Button>
+							) : (
+								<Button
+									type='submit'
+									className='mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
+									variant='contained'
+									startIcon={<BlockIcon />}
+								>
+									<p className='text-white'>Sold Out!</p>
+								</Button>
+							)}
 						</form>
 					</div>
 				</div>

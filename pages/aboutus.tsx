@@ -10,8 +10,8 @@ export default function aboutus() {
 			<p className='text-center'>
 				My name is Steven Chen and I am a Software Engineer graduate from
 				Centennial College in Ontario, Canada.<br></br> This website is created
-				to demonstrate my skills in developing a e-commerce store.<br></br> This
-				page was coded using Next.Js, MongoDB, TailwindCSS, and MaterialUI.
+				to demonstrate my skills in developing an e-commerce store.<br></br>{" "}
+				This page was coded using Next.Js, MongoDB, TailwindCSS, and MaterialUI.
 			</p>
 			<div className='border-t'>
 				<div>

@@ -29,6 +29,7 @@ export default async function register(
 			lastName,
 			email,
 			password: hashedPassword,
+			usertype: "customer",
 		});
 		res.status(200).json({ message: "User Registered successfully" });
 		return;
