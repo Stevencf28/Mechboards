@@ -466,7 +466,7 @@ export default function Products({
 														</p>
 														<p className='mt-1 text-md font-medium '>
 															<span className='text-red-500 font-bold'>
-																ON SALE!
+																SALE:
 															</span>{" "}
 															CA$
 															{product.salePrice.toFixed(2)}
@@ -479,7 +479,7 @@ export default function Products({
 														</p>
 														<p className='mt-1 text-md font-medium '>
 															<span className='text-red-500 font-bold'>
-																ON SALE!
+																SALE:
 															</span>{" "}
 															CA$
 															{product.salePrice.toFixed(2)}
