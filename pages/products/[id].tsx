@@ -20,11 +20,12 @@ interface Product {
 	name: string;
 	price: number;
 	quantity: number;
-	description: string;
 	imgSrc: string;
 	imgAlt: string;
+	amountSold: number;
+	sale: boolean;
+	salePrice: number;
 }
-
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 	try {
 		const id = params?.id as string;
@@ -111,7 +112,7 @@ export default function ProductPage({
 		}
 		router.push("/products");
 	}
-
+	console.log(product.sale);
 	return (
 		<div className='container m-auto'>
 			<div className='pt-16'>
@@ -141,7 +142,20 @@ export default function ProductPage({
 						<h1 className='text-base  sm:text-lg'>{product.description}</h1>
 						<div>
 							<p className='text-2xl tracking-tight'>Price:</p>
-							<p className='text-3xl tracking-tight'>CA${product.price}</p>
+
+							{product.sale ? (
+								<>
+									<p className='text-3xl tracking-tight line-through decoration-4'>
+										CA${product.price}
+									</p>
+									<p className='text-3xl tracking-tight font-bold'>
+										<span className='text-red-500 font-bold mr-2'>SALE:</span>
+										CA${product.price}
+									</p>
+								</>
+							) : (
+								<p className='text-3xl tracking-tight'>CA${product.price}</p>
+							)}
 						</div>
 						<form>
 							<label>Quantity</label>

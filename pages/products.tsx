@@ -57,8 +57,10 @@ export default function Products({
 	// get the max amount of pages possible with the amount of products
 	const [maxPage, setMaxPage] = useState(1);
 
+	// current page products
 	const [currentPageProducts, setCurrentPageProducts] = useState<Product[]>([]);
 
+	// mobile filters
 	const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
 	const subCategories = [
@@ -69,14 +71,14 @@ export default function Products({
 	];
 	const filters = [
 		{
-			id: "category",
-			name: "Category",
+			id: "priceRange",
+			name: "Price Range",
 			options: [
-				{ value: "new-arrivals", label: "New Arrivals", checked: false },
-				{ value: "sale", label: "Sale", checked: false },
-				{ value: "travel", label: "Travel", checked: false },
-				{ value: "organization", label: "Organization", checked: false },
-				{ value: "accessories", label: "Accessories", checked: false },
+				{ value: "0-50", label: "$0-50" },
+				{ value: "51-100", label: "$51-100" },
+				{ value: "101-150", label: "$101-150" },
+				{ value: "151-200", label: "$151-$200" },
+				{ value: "200+", label: "$200+" },
 			],
 		},
 	];
@@ -88,6 +90,7 @@ export default function Products({
 		{ name: "Price: High to Low", current: false },
 	];
 
+	// active Sort Order
 	const [activeOption, setActiveOption] = useState("");
 
 	useEffect(() => {
@@ -119,11 +122,9 @@ export default function Products({
 				break;
 			case "Price: Low to High":
 				newProducts.sort((a: Product, b: Product) => a.price - b.price);
-				console.log("low to high called");
 				break;
 			case "Price: High to Low":
 				newProducts.sort((a: Product, b: Product) => b.price - a.price);
-				console.log("high to low called");
 				break;
 			default:
 				newProducts.sort((a: Product, b: Product) => a.productId - b.productId);
@@ -264,7 +265,6 @@ export default function Products({
 																			name={`${section.id}[]`}
 																			defaultValue={option.value}
 																			type='checkbox'
-																			defaultChecked={option.checked}
 																			className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500'
 																		/>
 																		<label
@@ -419,7 +419,6 @@ export default function Products({
 																	name={`${section.id}[]`}
 																	defaultValue={option.value}
 																	type='checkbox'
-																	defaultChecked={option.checked}
 																	className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500'
 																/>
 																<label
@@ -461,7 +460,7 @@ export default function Products({
 											{product.sale ? (
 												product.quantity > 1 ? (
 													<>
-														<p className='mt-1 text-md font-medium line-through'>
+														<p className='mt-1 text-md font-medium line-through decoration-2'>
 															CA${product.price.toFixed(2)}
 														</p>
 														<p className='mt-1 text-md font-medium '>
@@ -474,7 +473,7 @@ export default function Products({
 													</>
 												) : (
 													<>
-														<p className='mt-1 text-md font-medium line-through'>
+														<p className='mt-1 text-md font-medium line-through decoration-2'>
 															CA${product.price.toFixed(2)}
 														</p>
 														<p className='mt-1 text-md font-medium '>
