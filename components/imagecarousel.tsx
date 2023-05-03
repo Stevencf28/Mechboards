@@ -34,6 +34,7 @@ function Item(props: any) {
 								variant='contained'
 								size='large'
 								href={props.item.link}
+								className='mb-2'
 								startIcon={<ShopIcon />}
 							>
 								<Typography variant='button' className='text-white py-1` px-2'>
