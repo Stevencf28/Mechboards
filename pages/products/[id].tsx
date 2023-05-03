@@ -114,19 +114,17 @@ export default function ProductPage({
 
 	return (
 		<div className='container m-auto'>
-			<div className='pt-8'>
-				<div className='pb-6 pl-40'>
-					<Button
-						className='flex flex-row space-x-2 bg-gray-800'
-						variant='contained'
-						onClick={handleBackClick}
-						startIcon={<ArrowBackIcon />}
-					>
-						<h4 className='text-md'>Go Back</h4>
-					</Button>
-				</div>
+			<div className='pt-16'>
 				<div className='mx-auto lg:grid lg:grid-cols-2 lg:grid-rows-2 lg:max-w-7xl lg:gap-x-8 lg:px-8'>
 					<div>
+						<Button
+							className='flex flex-row space-x-2 mb-2 bg-gray-800'
+							variant='contained'
+							onClick={handleBackClick}
+							startIcon={<ArrowBackIcon />}
+						>
+							<h4 className='text-md'>Go Back</h4>
+						</Button>
 						<Image
 							src={product.imgSrc}
 							alt={product.imgAlt}
@@ -136,7 +134,7 @@ export default function ProductPage({
 						/>
 					</div>
 					<div className='space-y-6'>
-						<h1 className='text-2xl font-bold tracking-tight text-center  sm:text-3xl'>
+						<h1 className='text-2xl font-bold tracking-tight text-center sm:text-3xl'>
 							{product.name}
 						</h1>
 
