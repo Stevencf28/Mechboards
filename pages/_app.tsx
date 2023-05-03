@@ -11,10 +11,10 @@ export default function App({ Component, pageProps }: AppProps) {
 			<Head>
 				<title>Mechboards</title>
 			</Head>
-			<div className='flex flex-col h-full w-full justify-between bg-background'>
+			<div className='flex flex-col h-full w-full justify-between '>
 				<Header />
 				<Navigation />
-				<div className=' min-h-full w-full bg-background'>
+				<div className=' min-h-full w-full'>
 					<Component {...pageProps} />
 				</div>
 				<Footer />

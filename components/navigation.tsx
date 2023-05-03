@@ -17,10 +17,6 @@ const navigation = [
 	{ name: "About Us", href: "/aboutus" },
 ];
 
-function classNames(...classes: any[]) {
-	return classes.filter(Boolean).join(" ");
-}
-
 export default function Navigation() {
 	const { user, mutateUser } = useUser();
 	const router = useRouter();
@@ -58,10 +54,8 @@ export default function Navigation() {
 												<Link
 													key={item.name}
 													href={item.href}
-													className={classNames(
-														"text-gray-300 hover:bg-gray-700 hover:text-white",
-														"px-3 py-2 rounded-md text-sm font-medium"
-													)}
+													className='text-gray-300 hover:bg-gray-700 hover:text-white
+														px-3 py-2 rounded-md text-sm font-medium'
 												>
 													{item.name}
 												</Link>
@@ -107,9 +101,9 @@ export default function Navigation() {
 													<Menu.Item>
 														<Link
 															href='/profile'
-															className={classNames(
+															className={
 																"block px-4 py-2 text-sm text-gray-700 hover:bg-gray-800 hover:text-white border-b"
-															)}
+															}
 														>
 															Your Profile
 														</Link>
@@ -119,9 +113,9 @@ export default function Navigation() {
 														<Menu.Item>
 															<Link
 																href='/admin'
-																className={classNames(
+																className={
 																	"block px-4 py-2 text-sm text-gray-700 hover:bg-gray-800 hover:text-white border-b"
-																)}
+																}
 															>
 																Admin Page
 															</Link>
@@ -132,9 +126,9 @@ export default function Navigation() {
 													<Menu.Item>
 														<Link
 															href='/orders'
-															className={classNames(
+															className={
 																"block px-4 py-2 text-sm text-gray-700 hover:bg-gray-800 hover:text-white border-b"
-															)}
+															}
 														>
 															Your orders
 														</Link>
@@ -142,9 +136,9 @@ export default function Navigation() {
 													<Menu.Item>
 														<Link
 															href='/cart'
-															className={classNames(
+															className={
 																"block px-4 py-2 text-sm text-gray-700 hover:bg-gray-800 hover:text-white border-b"
-															)}
+															}
 														>
 															Cart
 														</Link>
@@ -162,9 +156,9 @@ export default function Navigation() {
 																);
 																router.push("/login");
 															}}
-															className={classNames(
+															className={
 																"block px-4 py-2 text-sm text-gray-700 hover:bg-gray-800 hover:text-white"
-															)}
+															}
 														>
 															Sign out
 														</Link>
@@ -198,9 +192,9 @@ export default function Navigation() {
 													<Menu.Item>
 														<Link
 															href='/login'
-															className={classNames(
+															className={
 																"block px-4 py-2 text-sm text-gray-700 hover:bg-gray-800 hover:text-white"
-															)}
+															}
 														>
 															Login
 														</Link>
@@ -208,9 +202,9 @@ export default function Navigation() {
 													<Menu.Item>
 														<Link
 															href='/register'
-															className={classNames(
+															className={
 																"block px-4 py-2 text-sm text-gray-700 hover:bg-gray-800 hover:text-white"
-															)}
+															}
 														>
 															Register
 														</Link>
@@ -230,10 +224,9 @@ export default function Navigation() {
 										key={item.name}
 										as='a'
 										href={item.href}
-										className={classNames(
-											"text-gray-300 hover:bg-gray-700 hover:text-white",
-											"block px-3 py-2 rounded-md text-base font-medium"
-										)}
+										className={
+											"text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+										}
 									>
 										{item.name}
 									</Disclosure.Button>

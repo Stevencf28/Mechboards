@@ -136,13 +136,11 @@ export default function ProductPage({
 						/>
 					</div>
 					<div className='space-y-6'>
-						<h1 className='text-2xl font-bold tracking-tight text-center text-white sm:text-3xl'>
+						<h1 className='text-2xl font-bold tracking-tight text-center  sm:text-3xl'>
 							{product.name}
 						</h1>
 
-						<h1 className='text-base text-white sm:text-lg'>
-							{product.description}
-						</h1>
+						<h1 className='text-base  sm:text-lg'>{product.description}</h1>
 						<div>
 							<p className='text-2xl tracking-tight'>Price:</p>
 							<p className='text-3xl tracking-tight'>CA${product.price}</p>
