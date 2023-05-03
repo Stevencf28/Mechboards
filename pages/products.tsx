@@ -458,14 +458,50 @@ export default function Products({
 											<h3 className='mt-4 text-lg font-medium '>
 												{product.name}
 											</h3>
-											{product.quantity > 1 ? (
+											{product.sale ? (
+												product.quantity > 1 ? (
+													<>
+														<p className='mt-1 text-md font-medium line-through'>
+															CA${product.price.toFixed(2)}
+														</p>
+														<p className='mt-1 text-md font-medium '>
+															<span className='text-red-500 font-bold'>
+																ON SALE!
+															</span>{" "}
+															CA$
+															{product.salePrice.toFixed(2)}
+														</p>
+													</>
+												) : (
+													<>
+														<p className='mt-1 text-md font-medium line-through'>
+															CA${product.price.toFixed(2)}
+														</p>
+														<p className='mt-1 text-md font-medium '>
+															<span className='text-red-500 font-bold'>
+																ON SALE!
+															</span>{" "}
+															CA$
+															{product.salePrice.toFixed(2)}
+														</p>
+														<p className='mt-1 text-md text-red-500 font-bold'>
+															SOLD OUT
+														</p>
+													</>
+												)
+											) : product.quantity > 1 ? (
 												<p className='mt-1 text-md font-medium '>
-													CA${product.price}
+													CA${product.price.toFixed(2)}
 												</p>
 											) : (
-												<p className='mt-1 text-md font-medium '>
-													CA${product.price} | SOLD OUT
-												</p>
+												<>
+													<p className='mt-1 text-md font-medium '>
+														CA${product.price.toFixed(2)}
+													</p>
+													<p className='mt-1 text-md text-red-500 font-bold'>
+														SOLD OUT
+													</p>
+												</>
 											)}
 										</a>
 									))}
