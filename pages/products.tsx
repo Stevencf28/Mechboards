@@ -63,6 +63,9 @@ export default function Products({
 	// mobile filters
 	const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
+	// active filters
+	const [activeFilters, setActiveFilters] = useState({});
+
 	const subCategories = [
 		{ name: "Keyboards" },
 		{ name: "Keycaps" },
@@ -103,13 +106,29 @@ export default function Products({
 		setMaxPage(Math.ceil(products.length / pageSize));
 
 		// Apply filters
-		if (inStockOnly) {
-			let inStockProducts = products.filter(
-				(product: Product) => product.quantity > 0
-			);
-			setMaxPage(Math.ceil(inStockProducts.length / pageSize));
-			newProducts = inStockProducts.slice(startIndex, endIndex);
-		}
+		// if (inStockOnly) {
+		// 	let inStockProducts = products.filter(
+		// 		(product: Product) => product.quantity > 0
+		// 	);
+		// 	setMaxPage(Math.ceil(inStockProducts.length / pageSize));
+		// 	newProducts = inStockProducts.slice(startIndex, endIndex);
+		// }
+		let filteredProducts = [...products];
+
+		// apply filters
+		Object.keys(activeFilters).forEach((filterId) => {
+			const activeFilterValues = activeFilters[filterId];
+			if (activeFilterValues.length > 0) {
+				switch (filterId) {
+					case "priceRange":
+						filteredProducts = filteredProducts.filter((product) =>
+							activeFilterValues.includes(getPriceRange(product.price))
+						);
+						break;
+					// add more cases for other filters here
+				}
+			}
+		});
 
 		switch (sortOrder) {
 			case "Most Popular":
