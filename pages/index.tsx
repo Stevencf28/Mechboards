@@ -12,16 +12,13 @@ export default function Home() {
 					variant='h1'
 					className='font-bold text-5xl antialiased text-center'
 				>
-					Welcome to Mechboards!
+					Welcome to my E-commerce Website!
 				</Typography>
 				<Typography variant='body1'>
-					Lorem isum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-					veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-					ea commodo consequat. Duis aute irure dolor in reprehenderit in
-					voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-					sint occaecat cupidatat non proident, sunt in culpa qui officia
-					deserunt mollit anim id est laborum.
+					This website was created as a personal project for my portfolio! The
+					goal of the project was to create an e-commerce website. This project
+					was developed using Next.JS, MongoDB, Tailwind CSS, and Material UI.
+					Feel free to explore the pages and see what I have created.
 				</Typography>
 			</div>
 		</>
