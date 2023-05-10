@@ -18,7 +18,7 @@ function Item(props: any) {
 					<div className='flex mx-auto'>
 						<Typography
 							variant='h2'
-							className='text-white capitalize font-extrabold'
+							className='text-white capitalize font-extrabold drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]'
 						>
 							{props.item.name}
 						</Typography>
@@ -52,22 +52,22 @@ function Item(props: any) {
 export default function imageCarousel() {
 	var items = [
 		{
-			name: "Custom Mechnical Keyboards!",
+			name: "Welcome to my Website!",
 			image: "/board1.jpg",
 			link: "/products",
-			button: "Shop Keyboards",
+			button: "Products Page",
 		},
 		{
-			name: "Custom Mechnical Keyboards!",
+			name: "This is an e-commerce concept",
 			image: "/board2.jpeg",
 			link: "/products",
-			button: "Shop Keyboards",
+			button: "Products Page",
 		},
 		{
-			name: "Custom Mechnical Keyboards!",
+			name: "Hope you enjoy!",
 			image: "/board3.jpg",
 			link: "/products",
-			button: "Shop Keyboards",
+			button: "Products Page",
 		},
 	];
 
