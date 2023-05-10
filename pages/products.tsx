@@ -50,7 +50,7 @@ export default function Products({
 	const pageSize = 16;
 	const [currentPage, setCurrentPage] = useState(1);
 
-	// Filters products
+	// Filters for the products
 	const [sortOrder, setSortOrder] = useState("");
 	const [inStockOnly, setInStockOnly] = useState(false);
 
@@ -63,9 +63,6 @@ export default function Products({
 	// mobile filters
 	const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
-	// active filters
-	const [activeFilters, setActiveFilters] = useState({});
-
 	const subCategories = [
 		{ name: "Keyboards" },
 		{ name: "Keycaps" },
@@ -77,13 +74,23 @@ export default function Products({
 			id: "priceRange",
 			name: "Price Range",
 			options: [
-				{ value: "0-50", label: "$0-50" },
-				{ value: "51-100", label: "$51-100" },
-				{ value: "101-150", label: "$101-150" },
-				{ value: "151-200", label: "$151-$200" },
-				{ value: "200+", label: "$200+" },
+				{ value: "0-50", label: "$0-50", checked: false },
+				{ value: "51-100", label: "$51-100", checked: false },
+				{ value: "101-150", label: "$101-150", checked: false },
+				{ value: "151-200", label: "$151-$200", checked: false },
+				{ value: "200+", label: "$200+", checked: false },
 			],
 		},
+		{
+			id: "color",
+			name: "Color",
+			options: [
+				{ value: "red", label: "Red", checked: false },
+				{ value: "green", label: "Green", checked: false },
+				{ value: "blue", label: "Blue", checked: false },
+			],
+		},
+		// add more filters here
 	];
 
 	const sortOptions = [
@@ -93,42 +100,26 @@ export default function Products({
 		{ name: "Price: High to Low", current: false },
 	];
 
-	// active Sort Order
-	const [activeOption, setActiveOption] = useState("");
+	const [activeFilters, setActiveFilters] = useState([{}]);
 
 	useEffect(() => {
 		// filter products based on page and amount of products per page
 		// Since array starts at 0, the start index must be the current page subtracted by 1.
 		const startIndex = (currentPage - 1) * pageSize;
 		const endIndex = startIndex + pageSize;
+
 		// Set the current page products to the max amount of products per page
 		let newProducts = products.slice(startIndex, endIndex);
 		setMaxPage(Math.ceil(products.length / pageSize));
 
-		// Apply filters
-		// if (inStockOnly) {
-		// 	let inStockProducts = products.filter(
-		// 		(product: Product) => product.quantity > 0
-		// 	);
-		// 	setMaxPage(Math.ceil(inStockProducts.length / pageSize));
-		// 	newProducts = inStockProducts.slice(startIndex, endIndex);
-		// }
-		let filteredProducts = [...products];
-
-		// apply filters
-		Object.keys(activeFilters).forEach((filterId) => {
-			const activeFilterValues = activeFilters[filterId];
-			if (activeFilterValues.length > 0) {
-				switch (filterId) {
-					case "priceRange":
-						filteredProducts = filteredProducts.filter((product) =>
-							activeFilterValues.includes(getPriceRange(product.price))
-						);
-						break;
-					// add more cases for other filters here
-				}
-			}
-		});
+		// Instock Only Products Filter
+		if (inStockOnly) {
+			let inStockProducts = products.filter(
+				(product: Product) => product.quantity > 0
+			);
+			setMaxPage(Math.ceil(inStockProducts.length / pageSize));
+			newProducts = inStockProducts.slice(startIndex, endIndex);
+		}
 
 		switch (sortOrder) {
 			case "Most Popular":
@@ -161,21 +152,22 @@ export default function Products({
 		setCurrentPage(value);
 	};
 
+	// Handles inStockOnly change, updates the current page in case user is in any page other than 1
 	const handleInStockChange = (
-		event: React.ChangeEvent<{ value: unknown }>,
+		event: React.ChangeEvent<HTMLInputElement>,
 		checked: boolean
 	) => {
 		setInStockOnly(checked);
 		handlePageChange(event, 1);
 	};
 
+	const handleFilterChange = (filterId: string, checked: boolean) => {};
+
 	const handleSortOrderChange = (sortType: string) => {
-		if (sortType === activeOption) {
+		if (sortType === sortOrder) {
 			console.log("no change");
 			setSortOrder("");
-			setActiveOption("");
 		} else {
-			setActiveOption(sortType);
 			setSortOrder(sortType);
 		}
 		handlePageChange(null as any, 1);
@@ -276,14 +268,13 @@ export default function Products({
 															<div className='space-y-6'>
 																{section.options.map((option, optionIdx) => (
 																	<div
-																		key={option.value}
+																		key={option.value.toString()}
 																		className='flex items-center'
 																	>
-																		<input
+																		<Checkbox
 																			id={`filter-mobile-${section.id}-${optionIdx}`}
 																			name={`${section.id}[]`}
 																			defaultValue={option.value}
-																			type='checkbox'
 																			className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500'
 																		/>
 																		<label
@@ -306,6 +297,8 @@ export default function Products({
 						</div>
 					</Dialog>
 				</Transition.Root>
+
+				{/* Big Page */}
 
 				<main className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
 					<div className='flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24'>
@@ -353,8 +346,8 @@ export default function Products({
 														<a
 															onClick={() => handleSortOrderChange(option.name)}
 															className={`${
-																active || activeOption == option.name
-																	? "bg-gray-200 text-gray-900"
+																active || sortOrder == option.name
+																	? "bg-blue-200 text-gray-900 hover:bg-blue-400"
 																	: "text-gray-700"
 															} block px-4 py-2 text-sm w-full`}
 														>
@@ -430,14 +423,13 @@ export default function Products({
 													<div className='space-y-4'>
 														{section.options.map((option, optionIdx) => (
 															<div
-																key={option.value}
+																key={option.value.toString()}
 																className='flex items-center'
 															>
-																<input
+																<Checkbox
 																	id={`filter-${section.id}-${optionIdx}`}
 																	name={`${section.id}[]`}
 																	defaultValue={option.value}
-																	type='checkbox'
 																	className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500'
 																/>
 																<label
